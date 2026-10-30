@@ -25,7 +25,7 @@ from .extract import extract
 from .liveness import cause_of_death
 from .model import LocalModel, remember
 from .render import render
-from .wayback import fetch_archived_html, find_snapshot, pretty_ts
+from .wayback import Snapshot, fetch_archived_html, find_snapshot, pretty_ts
 
 MARIGOLD = "\033[38;5;214m"
 ROSE = "\033[38;5;205m"
@@ -107,7 +107,16 @@ def main(argv: list[str] | None = None) -> int:
         entry["cause"] = "not checked" if a.no_liveness else cause_of_death(url)
         print(c(GREY, f"      cause of death : {entry['cause']}"))
 
-        snap = find_snapshot(url, item["alive_until"])
+        # Snapshot lookups are cached too, so a re-run with --no-liveness
+        # needs no network at all (only the local model).
+        lookup = cache / ("lookup-" + hashlib.sha1(f"{url}|{item['alive_until']}".encode()).hexdigest()[:16] + ".json")
+        if lookup.exists():
+            saved = json.loads(lookup.read_text(encoding="utf-8"))
+            snap = Snapshot(**saved) if saved else None
+        else:
+            snap = find_snapshot(url, item["alive_until"])
+            if snap:  # never cache a miss: the archive may just have been down
+                lookup.write_text(json.dumps(snap.__dict__), encoding="utf-8")
         if not snap:
             print(c(ROSE, "      no snapshot    : the archive never saw it. Candle left unlit; nothing invented.\n"))
             entries.append(entry)
