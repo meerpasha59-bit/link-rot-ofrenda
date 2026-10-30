@@ -1,0 +1,9 @@
+# link-rot-ofrenda uses only the Python standard library (Python 3.10+).
+# Nothing to pip install for the tool itself.
+#
+# You do need a local model server that speaks the OpenAI-compatible chat API:
+#   * llama.cpp  (llama-server)  https://github.com/ggml-org/llama.cpp/releases
+#   * or Ollama                  https://ollama.com
+# and an open-weight model, e.g. Gemma 3 1B instruct:
+#   * GGUF: https://huggingface.co/ggml-org/gemma-3-1b-it-GGUF  (gemma-3-1b-it-Q4_K_M.gguf, ~800 MB)
+#   * Ollama: `ollama pull gemma3:1b`
