@@ -1,0 +1,14 @@
+# Lost links for the ofrenda.  Format:  URL | display name | last year known alive
+# Every archived entry below is dead today (checked Oct 2026): the domain no longer
+# resolves, answers 404, or redirects somewhere else entirely.
+http://www.geocities.com/SiliconValley/ | GeoCities: the SiliconValley neighbourhood | 2009
+http://www.pownce.com/ | Pownce | 2008
+http://www.jaiku.com/ | Jaiku | 2009
+http://www.google.com/reader/about/ | Google Reader | 2013
+http://www.posterous.com/ | Posterous | 2012
+http://www.gowalla.com/ | Gowalla | 2011
+http://www.grooveshark.com/ | Grooveshark | 2014
+http://www.rdio.com/ | Rdio | 2012
+http://ffffound.com/ | FFFFOUND! | 2016
+# A page the archive never saw, included on purpose: the tool must refuse to invent it.
+https://my-first-blog.invalid/2009/hello-world | A first blog post nobody saved
