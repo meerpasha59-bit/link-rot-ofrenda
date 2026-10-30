@@ -1,0 +1,79 @@
+🌼 link-rot-ofrenda 0.1.0  model=gemma-3-1b-it @ http://127.0.0.1:8080/v1
+   10 lost links to remember
+
+[1/10] http://www.geocities.com/SiliconValley/
+      cause of death : now redirects to yahoo.com
+      last snapshot  : 9 Oct 1999  (https://web.archive.org/web/19991009015113/http://www6.geocities.com:80/SiliconValley/)
+      recovered      : 371 chars, title “Yahoo! GeoCities - SiliconValley” (from local cache)
+      epitaph        : SiliconValley, a tender farewell to the digital echoes.
+      summary        : This page offered free home pages for a neighborhood called SiliconValley.
+      check          : 100% of summary words found in source -> grounded  (2.3s)
+
+[2/10] http://www.pownce.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 29 Dec 2008  (https://web.archive.org/web/20081229052219/http://pownce.com:80/)
+      recovered      : 483 chars, title “Pownce” (from local cache)
+      epitaph        : Pownce: A place of shared stories.
+      summary        : The Pownce page details the closure of the platform and expresses gratitude for its users.
+      check          : 50% of summary words found in source -> grounded  (2.2s)
+
+[3/10] http://www.jaiku.com/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 30 Dec 2009  (https://web.archive.org/web/20091230103428/http://www.jaiku.com:80/)
+      recovered      : 950 chars, title “Jaiku | Your Conversation” (from local cache)
+      epitaph        : Jaiku, a space for shared moments.
+      summary        : The page offers a platform for users to create and share conversations, primarily through text-based updates and interactions.
+      check          : 67% of summary words found in source -> grounded  (2.5s)
+
+[4/10] http://www.google.com/reader/about/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 31 Dec 2013  (https://web.archive.org/web/20131231184531/http://www.google.com/reader/about/)
+      recovered      : 875 chars, title “Google Reader – Google” (from local cache)
+      epitaph        : Google Reader, a faithful companion, now fades away.
+      summary        : This page details the discontinuation of Google Reader, explaining the reasons behind the decision.
+      check          : 56% of summary words found in source -> grounded  (2.3s)
+
+[5/10] http://www.posterous.com/
+      cause of death : the server answers HTTP 503
+      last snapshot  : 31 Dec 2012  (https://web.archive.org/web/20121231231902/https://posterous.com/)
+      recovered      : 1653 chars, title “Welcome to Posterous Spaces” (from local cache)
+      epitaph        : Posterous Spaces: A place to share, connect, and inspire.
+      summary        : This page details the functionality of Posterous Spaces, a platform for sharing and managing multiple online spaces.
+      check          : 75% of summary words found in source -> grounded  (2.6s)
+
+[6/10] http://www.gowalla.com/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 31 Dec 2011  (https://web.archive.org/web/20111231203528/http://gowalla.com/)
+      recovered      : 633 chars, title “Gowalla” (from local cache)
+      epitaph        : Gowalla, a gentle guide to cherished moments.
+      summary        : This page offers a platform for sharing and discovering places of interest, primarily focusing on locations and experiences.
+      check          : 50% of summary words found in source -> grounded  (2.3s)
+
+[7/10] http://www.grooveshark.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 31 Dec 2014  (https://web.archive.org/web/20141231124440/http://grooveshark.com/)
+      recovered      : 393 chars, title “Grooveshark - Free Music Streaming, Online Music” (from local cache)
+      epitaph        : May your music always echo softly.
+      summary        : This page describes Grooveshark, a free music streaming service.
+      check          : 100% of summary words found in source -> grounded  (2.1s)
+
+[8/10] http://www.rdio.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 31 Dec 2012  (https://web.archive.org/web/20121231193838/http://www.rdio.com/)
+      recovered      : 1621 chars, title “Rdio” (from local cache)
+      epitaph        : Rdio – a listening space for countless memories.
+      summary        : The page describes Rdio, a music streaming service offering millions of songs available on web, phone, and offline, with a focus on discovery and sharing.
+      check          : 73% of summary words found in source -> grounded  (2.8s)
+
+[9/10] http://ffffound.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 5 Nov 2016  (https://web.archive.org/web/20161105131314/http://ffffound.com/)
+      recovered      : 1800 chars, title “FFFFOUND!” (from local cache)
+      epitaph        : FFFFOUND! – A digital echo of lost stories.
+      check          : 12% of summary words found in source -> withheld, quoting the page instead  (5.3s)
+
+[10/10] https://my-first-blog.invalid/2009/hello-world
+      cause of death : never resolvable (reserved .invalid domain)
+      no snapshot    : the archive never saw it. Candle left unlit; nothing invented.
+
+🕯️  9 candles lit, 1 unlit. Wrote docs/index.html and docs/ofrenda.json in 153s.

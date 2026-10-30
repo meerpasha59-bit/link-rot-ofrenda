@@ -1,0 +1,233 @@
+[
+  {
+    "url": "http://www.geocities.com/SiliconValley/",
+    "label": "GeoCities: the SiliconValley neighbourhood",
+    "alive_until": "2009",
+    "cause": "now redirects to yahoo.com",
+    "snapshot": {
+      "timestamp": "19991009015113",
+      "pretty": "9 Oct 1999",
+      "first_seen": "19961221001928",
+      "first_seen_pretty": "21 Dec 1996",
+      "view_url": "https://web.archive.org/web/19991009015113/http://www6.geocities.com:80/SiliconValley/",
+      "original": "http://www6.geocities.com:80/SiliconValley/"
+    },
+    "title": "Yahoo! GeoCities - SiliconValley",
+    "own_words": "Get your own free home page",
+    "memory": {
+      "summary": "This page offered free home pages for a neighborhood called SiliconValley.",
+      "epitaph": "SiliconValley, a tender farewell to the digital echoes.",
+      "offering": "Home pages for a neighborhood.",
+      "grounding": 1.0,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.pownce.com/",
+    "label": "Pownce",
+    "alive_until": "2008",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20081229052219",
+      "pretty": "29 Dec 2008",
+      "first_seen": "20070628204041",
+      "first_seen_pretty": "28 Jun 2007",
+      "view_url": "https://web.archive.org/web/20081229052219/http://pownce.com:80/",
+      "original": "http://pownce.com:80/"
+    },
+    "title": "Pownce",
+    "own_words": "Pownce was closed down on December 15, 2008. The engineering team and technology are now a part of Six Apart, makers of the best blogging tools around.",
+    "memory": {
+      "summary": "The Pownce page details the closure of the platform and expresses gratitude for its users.",
+      "epitaph": "Pownce: A place of shared stories.",
+      "offering": "Connections and shared content",
+      "grounding": 0.5,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.jaiku.com/",
+    "label": "Jaiku",
+    "alive_until": "2009",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20091230103428",
+      "pretty": "30 Dec 2009",
+      "first_seen": null,
+      "first_seen_pretty": "unknown",
+      "view_url": "https://web.archive.org/web/20091230103428/http://www.jaiku.com:80/",
+      "original": "http://www.jaiku.com:80/"
+    },
+    "title": "Jaiku | Your Conversation",
+    "own_words": "Create your own microblog and connect with your friends. Post from the Web, by SMS, or from desktop clients. Add comments, use icons, link Webfeeds. Take it with you on your phone.",
+    "memory": {
+      "summary": "The page offers a platform for users to create and share conversations, primarily through text-based updates and interactions.",
+      "epitaph": "Jaiku, a space for shared moments.",
+      "offering": "Connections and updates through Web feeds.",
+      "grounding": 0.67,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.google.com/reader/about/",
+    "label": "Google Reader",
+    "alive_until": "2013",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20131231184531",
+      "pretty": "31 Dec 2013",
+      "first_seen": "20130702064036",
+      "first_seen_pretty": "2 Jul 2013",
+      "view_url": "https://web.archive.org/web/20131231184531/http://www.google.com/reader/about/",
+      "original": "http://www.google.com/reader/about/"
+    },
+    "title": "Google Reader – Google",
+    "own_words": "Thank you for stopping by. Google Reader has been discontinued.",
+    "memory": {
+      "summary": "This page details the discontinuation of Google Reader, explaining the reasons behind the decision.",
+      "epitaph": "Google Reader, a faithful companion, now fades away.",
+      "offering": "Lists of people followed and starred items.",
+      "grounding": 0.57,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.posterous.com/",
+    "label": "Posterous",
+    "alive_until": "2012",
+    "cause": "the server answers HTTP 503",
+    "snapshot": {
+      "timestamp": "20121231231902",
+      "pretty": "31 Dec 2012",
+      "first_seen": null,
+      "first_seen_pretty": "unknown",
+      "view_url": "https://web.archive.org/web/20121231231902/https://posterous.com/",
+      "original": "https://posterous.com/"
+    },
+    "title": "Welcome to Posterous Spaces",
+    "own_words": "We've been acquired by Twitter! Signing up is free and easy!",
+    "memory": {
+      "summary": "This page details the functionality of Posterous Spaces, a platform for sharing and managing multiple online spaces.",
+      "epitaph": "Posterous Spaces: A place to share, connect, and inspire.",
+      "offering": "Spaces for safe and easily manageable online content.",
+      "grounding": 0.75,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.gowalla.com/",
+    "label": "Gowalla",
+    "alive_until": "2011",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20111231203528",
+      "pretty": "31 Dec 2011",
+      "first_seen": null,
+      "first_seen_pretty": "unknown",
+      "view_url": "https://web.archive.org/web/20111231203528/http://gowalla.com/",
+      "original": "http://gowalla.com/"
+    },
+    "title": "Gowalla",
+    "own_words": "Discover our world’s most loved places while sharing the places",
+    "memory": {
+      "summary": "This page offers a platform for sharing and discovering places of interest, primarily focusing on locations and experiences.",
+      "epitaph": "Gowalla, a gentle guide to cherished moments.",
+      "offering": "Stories and memories of places.",
+      "grounding": 0.5,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.grooveshark.com/",
+    "label": "Grooveshark",
+    "alive_until": "2014",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20141231124440",
+      "pretty": "31 Dec 2014",
+      "first_seen": "20060714215650",
+      "first_seen_pretty": "14 Jul 2006",
+      "view_url": "https://web.archive.org/web/20141231124440/http://grooveshark.com/",
+      "original": "http://grooveshark.com/"
+    },
+    "title": "Grooveshark - Free Music Streaming, Online Music",
+    "own_words": "Grooveshark is free music, online radio, and so much more.  Enjoy unlimited free music streaming with a worldwide community of artists and music lovers.",
+    "memory": {
+      "summary": "This page describes Grooveshark, a free music streaming service.",
+      "epitaph": "May your music always echo softly.",
+      "offering": "Connections to music, freely shared.",
+      "grounding": 1.0,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://www.rdio.com/",
+    "label": "Rdio",
+    "alive_until": "2012",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20121231193838",
+      "pretty": "31 Dec 2012",
+      "first_seen": "20020329001852",
+      "first_seen_pretty": "29 Mar 2002",
+      "view_url": "https://web.archive.org/web/20121231193838/http://www.rdio.com/",
+      "original": "http://www.rdio.com/"
+    },
+    "title": "Rdio",
+    "own_words": "Rdio lets you listen to millions of songs ad-free wherever you are – on the web and on your phone, even offline.",
+    "memory": {
+      "summary": "The page describes Rdio, a music streaming service offering millions of songs available on web, phone, and offline, with a focus on discovery and sharing.",
+      "epitaph": "Rdio – a listening space for countless memories.",
+      "offering": "Music, accessible everywhere.",
+      "grounding": 0.73,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true
+    }
+  },
+  {
+    "url": "http://ffffound.com/",
+    "label": "FFFFOUND!",
+    "alive_until": "2016",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20161105131314",
+      "pretty": "5 Nov 2016",
+      "first_seen": "20070608114042",
+      "first_seen_pretty": "8 Jun 2007",
+      "view_url": "https://web.archive.org/web/20161105131314/http://ffffound.com/",
+      "original": "http://ffffound.com/"
+    },
+    "title": "FFFFOUND!",
+    "own_words": "iFOUND! | iPhone application for FFFFOUND comes back to App Store!!!",
+    "memory": {
+      "summary": "The page offers a glimpse into a digital archive, revealing a collection of images and text fragments related to a project called ‘FFFFOUND’. It details the creation of a digital collection of lost web pages.",
+      "epitaph": "FFFFOUND! – A digital echo of lost stories.",
+      "offering": "Lost links, preserved in pixels.",
+      "grounding": 0.12,
+      "suspects": [],
+      "temperature": 0.1,
+      "verified": false
+    }
+  },
+  {
+    "url": "https://my-first-blog.invalid/2009/hello-world",
+    "label": "A first blog post nobody saved",
+    "alive_until": null,
+    "cause": "never resolvable (reserved .invalid domain)"
+  }
+]
