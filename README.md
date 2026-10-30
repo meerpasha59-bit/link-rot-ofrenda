@@ -60,7 +60,7 @@ http://ffffound.com/   | FFFFOUND! | 2016
 https://my-old-blog.example/2009/hello-world
 ```
 
-Useful flags: `--no-liveness` (skip the live check), `--cache DIR` (archived pages are cached, so re-runs only hit the model), `--title`, `--temperature`, `--json PATH`.
+Useful flags: `--no-liveness` (skip the live check), `--cache DIR` (archived pages and snapshot lookups are cached, so a re-run with `--no-liveness` needs no network, only the local model), `--title`, `--temperature`, `--json PATH`.
 
 ## Tests
 
