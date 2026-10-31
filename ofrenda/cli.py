@@ -261,7 +261,7 @@ def main(argv: list[str] | None = None) -> int:
             budget_hit = budget_hit or e.detail[:120]
             mem = {"summary": "", "epitaph": "", "offering": "", "grounding": 0.0, "suspects": [],
                    "verified": False, "budget": budget_hit}
-            print(c(ROSE, f"      budget reached : {budget_hit}. No model asked; the page speaks for itself."))
+            print(c(ROSE, f"      budget reached : {budget_hit}. Unchecked model text discarded; the page speaks for itself."))
         entry["memory"] = mem
         if mem.get("budget"):
             print()
