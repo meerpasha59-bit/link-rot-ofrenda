@@ -78,10 +78,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("input", help="text file with one URL per line")
     ap.add_argument("-o", "--out", default="docs/index.html", help="HTML file to write")
     ap.add_argument("--json", default=None, help="also write the raw results here (default: next to --out)")
+    ap.add_argument("--backend", choices=["local", "otari"], default=os.environ.get("OFRENDA_BACKEND", "local"),
+                    help="local: your own llama.cpp/Ollama server. otari: open-weight models through the "
+                         "Otari.ai gateway (needs OTARI_API_KEY)")
     ap.add_argument("--endpoint", default=os.environ.get("OFRENDA_ENDPOINT", "http://127.0.0.1:8080/v1"),
                     help="OpenAI-compatible local endpoint (llama-server :8080/v1, Ollama :11434/v1)")
-    ap.add_argument("--model", default=os.environ.get("OFRENDA_MODEL", "gemma-3-1b-it"),
-                    help="model name to request and to credit on the page (e.g. gemma3:1b for Ollama)")
+    ap.add_argument("--model", default=os.environ.get("OFRENDA_MODEL"),
+                    help="model name to request and to credit on the page (default gemma-3-1b-it locally, "
+                         "google/gemma-3-27b-it on Otari; e.g. gemma3:1b for Ollama)")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -93,7 +97,16 @@ def main(argv: list[str] | None = None) -> int:
     c = color(not a.no_color and sys.stdout.isatty() or os.environ.get("FORCE_COLOR") == "1")
     cache = Path(a.cache)
     cache.mkdir(parents=True, exist_ok=True)
-    llm = LocalModel(a.endpoint, a.model, temperature=a.temperature)
+    if a.backend == "otari":
+        from .otari import Otari, OtariModel
+        a.model = a.model or "google/gemma-3-27b-it"
+        client = Otari(session_label=f"ofrenda-{time.strftime('%Y%m%d-%H%M%S')}")
+        llm = OtariModel(client, a.model, temperature=a.temperature)
+        a.endpoint = client.base
+    else:
+        a.model = a.model or "gemma-3-1b-it"
+        client = None
+        llm = LocalModel(a.endpoint, a.model, temperature=a.temperature)
     items = parse_input(a.input)
 
     print(c(MARIGOLD, f"🌼 link-rot-ofrenda {__version__}") + c(DIM, f"  model={a.model} @ {a.endpoint}"))
@@ -158,6 +171,9 @@ def main(argv: list[str] | None = None) -> int:
 
         t = time.time()
         mem = remember(llm, url, pretty_ts(snap.timestamp), info["title"], source, name=item["label"])
+        if client is not None and llm.last is not None:
+            mem["served_by"] = {"model": llm.last.served_model, "provider": llm.last.provider,
+                                "fallback": llm.last.fallback}
         entry["memory"] = mem
         status = c(GREEN, "grounded") if mem.get("verified") else c(ROSE, "withheld, quoting the page instead")
         print(c(ROSE, f"      epitaph        : {mem.get('epitaph', '')}"))
@@ -174,6 +190,8 @@ def main(argv: list[str] | None = None) -> int:
     json_path = Path(a.json) if a.json else out.with_name("ofrenda.json")
     json_path.write_text(json.dumps(entries, indent=2, ensure_ascii=False), encoding="utf-8")
     lit = sum(1 for e in entries if e.get("snapshot"))
+    if client is not None:
+        print(c(DIM, f"   Otari: {len(client.calls)} gateway calls, ${client.spent:.4f} spent this run"))
     print(c(MARIGOLD, f"🕯️  {lit} candles lit, {len(entries) - lit} unlit.") +
           f" Wrote {out} and {json_path} in {time.time() - t0:.0f}s.")
     return 0
