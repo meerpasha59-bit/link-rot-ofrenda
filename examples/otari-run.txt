@@ -1,0 +1,117 @@
+🌼 link-rot-ofrenda 0.1.0  model=epitaph-chain → google/gemma-3-27b-it → mistralai/ministral-3-14b @ https://api.otari.ai/api/v1
+   10 lost links to remember
+
+[1/10] http://www.geocities.com/SiliconValley/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 9 Oct 1999  (https://web.archive.org/web/19991009015113/http://www6.geocities.com:80/SiliconValley/)
+      recovered      : 371 chars, title “Yahoo! GeoCities - SiliconValley” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/GeoCities  (GeoCities - Wikipedia)
+      lives on at    : https://www.webdesignmuseum.org/exhibitions/geocities-neighborhoods  (GeoCities Neighborhoods - Web Design Museum)
+      epitaph        : GeoCities SiliconValley: a place to build a free home.
+      summary        : This page offered free home pages and invited visitors to explore neighborhoods. It also provided access to Yahoo! resources, clubs, and user groups.
+      check          : 83% of summary words found in source -> grounded  (2.6s)
+
+[2/10] http://www.pownce.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 29 Dec 2008  (https://web.archive.org/web/20081229052219/http://pownce.com:80/)
+      recovered      : 483 chars, title “Pownce” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/Pownce  (Pownce - Wikipedia)
+      lives on at    : https://venturebeat.com/business/six-apart-acquires-and-shuts-down-pownce  (Six Apart acquires and shuts down Pownce | Venture)
+      epitaph        : Pownce: For the friendships made and the sharing we knew.
+      summary        : Pownce allowed people to meet and know wonderful people and share stuff together. The engineering team and technology are now a part of Six Apart.
+      check          : 87% of summary words found in source -> grounded  (2.3s)
+
+[3/10] http://www.jaiku.com/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 30 Dec 2009  (https://web.archive.org/web/20091230103428/http://www.jaiku.com:80/)
+      recovered      : 950 chars, title “Jaiku | Your Conversation” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : http://taggedwiki.zubiaga.org/new_content/ec78182cf3aec2bc84de842ccf3775d1  (Jaiku - Wikipedia, the free encyclopedia)
+      lives on at    : https://www.failory.com/google/jaiku  (What Was Jaiku and Why Was it Discontinued?)
+      epitaph        : Jaiku: a space for your conversation, now quiet.
+      summary        : Jaiku allowed users to create their own microblog and connect with friends. Visitors could post from the web, by SMS, or from desktop clients, creating their own activity stream.
+      check          : 79% of summary words found in source -> grounded  (3.0s)
+
+[4/10] http://www.google.com/reader/about/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 31 Dec 2013  (https://web.archive.org/web/20131231184531/http://www.google.com/reader/about/)
+      recovered      : 875 chars, title “Google Reader – Google” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/Google_Reader  (Google Reader - Wikipedia)
+      epitaph        : Google Reader: For lists of people you followed, rest in peace.
+      summary        : This page announced that Google Reader has been discontinued. It thanked loyal fans and offered a link to frequently-asked questions about data deletion.
+      check          : 85% of summary words found in source -> grounded  (2.5s)
+
+[5/10] http://www.posterous.com/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 31 Dec 2012  (https://web.archive.org/web/20121231231902/https://posterous.com/)
+      recovered      : 1653 chars, title “Welcome to Posterous Spaces” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/Posterous  (Posterous - Wikipedia)
+      lives on at    : https://startups.rip/company/posterous  (Posterous (S08): Acquisition History and Rebuild P)
+      epitaph        : Posterous: A space to share, and to be seen.
+      summary        : Posterous Spaces was the easiest way to share safely online. Millions of users were sharing smarter with Posterous Spaces, from personal blogs to business websites.
+      check          : 100% of summary words found in source -> grounded  (3.0s)
+
+[6/10] http://www.gowalla.com/
+      cause of death : the server answers HTTP 404
+      last snapshot  : 31 Dec 2011  (https://web.archive.org/web/20111231203528/http://gowalla.com/)
+      recovered      : 633 chars, title “Gowalla” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/Gowalla  (Gowalla - Wikipedia)
+      epitaph        : Gowalla: a place to share what you loved.
+      summary        : Gowalla let users discover loved places and share the places that meant the world to them. Visitors could browse guides and share stories, photos, and favorite places on the go.
+      check          : 88% of summary words found in source -> grounded  (2.8s)
+
+[7/10] http://www.grooveshark.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 31 Dec 2014  (https://web.archive.org/web/20141231124440/http://grooveshark.com/)
+      recovered      : 393 chars, title “Grooveshark - Free Music Streaming, Online Music” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/Grooveshark  (Grooveshark - Wikipedia)
+      lives on at    : https://www.billboard.com/pro/grooveshark-to-shut-down  (Grooveshark Shuts Down - Billboard)
+      epitaph        : Grooveshark: a stream of music for all who listened.
+      summary        : Grooveshark offered free music, online radio, and internet streaming. Visitors could enjoy unlimited free music streaming with a worldwide community of artists and music lovers.
+      check          : 94% of summary words found in source -> grounded  (2.9s)
+
+[8/10] http://www.rdio.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 31 Dec 2012  (https://web.archive.org/web/20121231193838/http://www.rdio.com/)
+      recovered      : 1621 chars, title “Rdio” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://www.theverge.com/2015/11/20/9772784/rdio-shutdown-free-tier-pandora-acquisition  (Rdio’s shutdown begins November 23rd with a transi)
+      lives on at    : https://www.cultofmac.com/news/rdio-shutdown  (Rdio marches to death playing the high notes)
+      epitaph        : Rdio: a library of millions, and a way to find what to listen to next.
+      summary        : Rdio let you listen to millions of songs ad-free, wherever you are. It was about human powered music discovery and collecting and sharing the music you love.
+      check          : 93% of summary words found in source -> grounded  (2.4s)
+
+[9/10] http://ffffound.com/
+      cause of death : the domain no longer resolves
+      last snapshot  : 5 Nov 2016  (https://web.archive.org/web/20161105131314/http://ffffound.com/)
+      recovered      : 1800 chars, title “FFFFOUND!” (from local cache)
+      written by     : google/gemma-3-27b-it on nebius via Otari (asked for epitaph-chain)
+      witness        : Qwen/Qwen3-30B-A3B-Instruct-2507 -> supported
+      lives on at    : https://en.wikipedia.org/wiki/FFFFOUND!  (FFFFOUND! - Wikipedia)
+      lives on at    : https://medium.com/@dustinwilkie/a-retrospective-on-ffffound-15-years-later-b9b2181fb31b  (A FFFFOUND! Retrospective — 15 Years Later | by Du)
+      epitaph        : FFFOUND!—a place to keep what caught the eye.
+      summary        : FFFOUND! was a site where people could save images found online. An iPhone application for FFFFOUND! was once available.
+      check          : 70% of summary words found in source -> grounded  (2.4s)
+
+[10/10] https://my-first-blog.invalid/2009/hello-world
+      cause of death : never resolvable (reserved .invalid domain)
+      MCP lookup     : no successful capture reported
+      no snapshot    : the archive never saw it. Candle left unlit; nothing invented.
+
+   reckoner: openai/gpt-oss-120b computed 9 spans in Otari's code sandbox; 9 match a local check
+   Otari: 20 gateway calls, $0.0115 spent this run (cap $0.25)
+🕯️  9 candles lit, 1 unlit. Wrote docs/otari/index.html and docs/otari/ofrenda.json in 73s.

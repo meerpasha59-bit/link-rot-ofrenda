@@ -1,0 +1,539 @@
+[
+  {
+    "url": "http://www.geocities.com/SiliconValley/",
+    "label": "GeoCities: the SiliconValley neighbourhood",
+    "alive_until": "2009",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "19991009015113",
+      "pretty": "9 Oct 1999",
+      "first_seen": "19961221001928",
+      "first_seen_pretty": "21 Dec 1996",
+      "view_url": "https://web.archive.org/web/19991009015113/http://www6.geocities.com:80/SiliconValley/",
+      "original": "http://www6.geocities.com:80/SiliconValley/"
+    },
+    "title": "Yahoo! GeoCities - SiliconValley",
+    "own_words": "Get your own free home page",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/GeoCities",
+          "title": "GeoCities - Wikipedia",
+          "query": "GeoCities SiliconValley neighborhood history"
+        },
+        {
+          "url": "https://www.webdesignmuseum.org/exhibitions/geocities-neighborhoods",
+          "title": "GeoCities Neighborhoods - Web Design Museum",
+          "query": "GeoCities SiliconValley neighborhood history"
+        }
+      ],
+      "queries": [
+        "GeoCities SiliconValley neighborhood history"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "This page offered free home pages and invited visitors to explore neighborhoods. It also provided access to Yahoo! resources, clubs, and user groups.",
+      "epitaph": "GeoCities SiliconValley: a place to build a free home.",
+      "offering": "home page",
+      "grounding": 0.83,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 1022,
+      "words": "2 years 9 months"
+    }
+  },
+  {
+    "url": "http://www.pownce.com/",
+    "label": "Pownce",
+    "alive_until": "2008",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20081229052219",
+      "pretty": "29 Dec 2008",
+      "first_seen": "20070628204041",
+      "first_seen_pretty": "28 Jun 2007",
+      "view_url": "https://web.archive.org/web/20081229052219/http://pownce.com:80/",
+      "original": "http://pownce.com:80/"
+    },
+    "title": "Pownce",
+    "own_words": "Pownce was closed down on December 15, 2008. The engineering team and technology are now a part of Six Apart, makers of the best blogging tools around.",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Pownce",
+          "title": "Pownce - Wikipedia",
+          "query": "Pownce website shutdown announcement"
+        },
+        {
+          "url": "https://venturebeat.com/business/six-apart-acquires-and-shuts-down-pownce",
+          "title": "Six Apart acquires and shuts down Pownce | VentureBeat",
+          "query": "Pownce website shutdown announcement"
+        }
+      ],
+      "queries": [
+        "Pownce website shutdown announcement"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "Pownce allowed people to meet and know wonderful people and share stuff together. The engineering team and technology are now a part of Six Apart.",
+      "epitaph": "Pownce: For the friendships made and the sharing we knew.",
+      "offering": "shares",
+      "grounding": 0.87,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 550,
+      "words": "1 year 6 months"
+    }
+  },
+  {
+    "url": "http://www.jaiku.com/",
+    "label": "Jaiku",
+    "alive_until": "2009",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20091230103428",
+      "pretty": "30 Dec 2009",
+      "first_seen": "20010720130045",
+      "first_seen_pretty": "20 Jul 2001",
+      "view_url": "https://web.archive.org/web/20091230103428/http://www.jaiku.com:80/",
+      "original": "http://www.jaiku.com:80/"
+    },
+    "title": "Jaiku | Your Conversation",
+    "own_words": "Create your own microblog and connect with your friends. Post from the Web, by SMS, or from desktop clients. Add comments, use icons, link Webfeeds. Take it with you on your phone.",
+    "afterlife": {
+      "links": [
+        {
+          "url": "http://taggedwiki.zubiaga.org/new_content/ec78182cf3aec2bc84de842ccf3775d1",
+          "title": "Jaiku - Wikipedia, the free encyclopedia",
+          "query": "Jaiku website what happened"
+        },
+        {
+          "url": "https://www.failory.com/google/jaiku",
+          "title": "What Was Jaiku and Why Was it Discontinued?",
+          "query": "Jaiku website what happened"
+        }
+      ],
+      "queries": [
+        "Jaiku website what happened"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "Jaiku allowed users to create their own microblog and connect with friends. Visitors could post from the web, by SMS, or from desktop clients, creating their own activity stream.",
+      "epitaph": "Jaiku: a space for your conversation, now quiet.",
+      "offering": "icons",
+      "grounding": 0.79,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 3085,
+      "words": "8 years"
+    }
+  },
+  {
+    "url": "http://www.google.com/reader/about/",
+    "label": "Google Reader",
+    "alive_until": "2013",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20131231184531",
+      "pretty": "31 Dec 2013",
+      "first_seen": "20130702064036",
+      "first_seen_pretty": "2 Jul 2013",
+      "view_url": "https://web.archive.org/web/20131231184531/http://www.google.com/reader/about/",
+      "original": "http://www.google.com/reader/about/"
+    },
+    "title": "Google Reader – Google",
+    "own_words": "Thank you for stopping by. Google Reader has been discontinued.",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Google_Reader",
+          "title": "Google Reader - Wikipedia",
+          "query": "Google Reader shutdown announcement or successor"
+        }
+      ],
+      "queries": [
+        "Google Reader shutdown announcement or successor"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "This page announced that Google Reader has been discontinued. It thanked loyal fans and offered a link to frequently-asked questions about data deletion.",
+      "epitaph": "Google Reader: For lists of people you followed, rest in peace.",
+      "offering": "subscriptions",
+      "grounding": 0.85,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 182,
+      "words": "6 months"
+    }
+  },
+  {
+    "url": "http://www.posterous.com/",
+    "label": "Posterous",
+    "alive_until": "2012",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20121231231902",
+      "pretty": "31 Dec 2012",
+      "first_seen": "20080424060852",
+      "first_seen_pretty": "24 Apr 2008",
+      "view_url": "https://web.archive.org/web/20121231231902/https://posterous.com/",
+      "original": "https://posterous.com/"
+    },
+    "title": "Welcome to Posterous Spaces",
+    "own_words": "We've been acquired by Twitter! Signing up is free and easy!",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Posterous",
+          "title": "Posterous - Wikipedia",
+          "query": "what happened to Posterous website"
+        },
+        {
+          "url": "https://startups.rip/company/posterous",
+          "title": "Posterous (S08): Acquisition History and Rebuild Plan - Startups.RIP",
+          "query": "what happened to Posterous website"
+        }
+      ],
+      "queries": [
+        "what happened to Posterous website"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "Posterous Spaces was the easiest way to share safely online. Millions of users were sharing smarter with Posterous Spaces, from personal blogs to business websites.",
+      "epitaph": "Posterous: A space to share, and to be seen.",
+      "offering": "photos",
+      "grounding": 1.0,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 1712,
+      "words": "4 years 8 months"
+    }
+  },
+  {
+    "url": "http://www.gowalla.com/",
+    "label": "Gowalla",
+    "alive_until": "2011",
+    "cause": "the server answers HTTP 404",
+    "snapshot": {
+      "timestamp": "20111231203528",
+      "pretty": "31 Dec 2011",
+      "first_seen": "20090208111846",
+      "first_seen_pretty": "8 Feb 2009",
+      "view_url": "https://web.archive.org/web/20111231203528/http://gowalla.com/",
+      "original": "http://gowalla.com/"
+    },
+    "title": "Gowalla",
+    "own_words": "Discover our world’s most loved places while sharing the places",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Gowalla",
+          "title": "Gowalla - Wikipedia",
+          "query": "Gowalla website shutdown information"
+        }
+      ],
+      "queries": [
+        "Gowalla website shutdown information"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "Gowalla let users discover loved places and share the places that meant the world to them. Visitors could browse guides and share stories, photos, and favorite places on the go.",
+      "epitaph": "Gowalla: a place to share what you loved.",
+      "offering": "photos",
+      "grounding": 0.88,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 1056,
+      "words": "2 years 10 months"
+    }
+  },
+  {
+    "url": "http://www.grooveshark.com/",
+    "label": "Grooveshark",
+    "alive_until": "2014",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20141231124440",
+      "pretty": "31 Dec 2014",
+      "first_seen": "20060714215650",
+      "first_seen_pretty": "14 Jul 2006",
+      "view_url": "https://web.archive.org/web/20141231124440/http://grooveshark.com/",
+      "original": "http://grooveshark.com/"
+    },
+    "title": "Grooveshark - Free Music Streaming, Online Music",
+    "own_words": "Grooveshark is free music, online radio, and so much more.  Enjoy unlimited free music streaming with a worldwide community of artists and music lovers.",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/Grooveshark",
+          "title": "Grooveshark - Wikipedia",
+          "query": "Grooveshark website shutdown announcement"
+        },
+        {
+          "url": "https://www.billboard.com/pro/grooveshark-to-shut-down",
+          "title": "Grooveshark Shuts Down - Billboard",
+          "query": "Grooveshark website shutdown announcement"
+        }
+      ],
+      "queries": [
+        "Grooveshark website shutdown announcement"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "Grooveshark offered free music, online radio, and internet streaming. Visitors could enjoy unlimited free music streaming with a worldwide community of artists and music lovers.",
+      "epitaph": "Grooveshark: a stream of music for all who listened.",
+      "offering": "music",
+      "grounding": 0.94,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 3092,
+      "words": "8 years"
+    }
+  },
+  {
+    "url": "http://www.rdio.com/",
+    "label": "Rdio",
+    "alive_until": "2012",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20121231193838",
+      "pretty": "31 Dec 2012",
+      "first_seen": "20020329001852",
+      "first_seen_pretty": "29 Mar 2002",
+      "view_url": "https://web.archive.org/web/20121231193838/http://www.rdio.com/",
+      "original": "http://www.rdio.com/"
+    },
+    "title": "Rdio",
+    "own_words": "Rdio lets you listen to millions of songs ad-free wherever you are – on the web and on your phone, even offline.",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://www.theverge.com/2015/11/20/9772784/rdio-shutdown-free-tier-pandora-acquisition",
+          "title": "Rdio’s shutdown begins November 23rd with a transition to ad-supported listening | The Verge",
+          "query": "Rdio shutdown announcement successor"
+        },
+        {
+          "url": "https://www.cultofmac.com/news/rdio-shutdown",
+          "title": "Rdio marches to death playing the high notes",
+          "query": "Rdio shutdown announcement successor"
+        }
+      ],
+      "queries": [
+        "Rdio website shutdown announcement",
+        "Rdio shutdown announcement successor"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 9
+    },
+    "memory": {
+      "summary": "Rdio let you listen to millions of songs ad-free, wherever you are. It was about human powered music discovery and collecting and sharing the music you love.",
+      "epitaph": "Rdio: a library of millions, and a way to find what to listen to next.",
+      "offering": "playlists",
+      "grounding": 0.93,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 3930,
+      "words": "10 years"
+    }
+  },
+  {
+    "url": "http://ffffound.com/",
+    "label": "FFFFOUND!",
+    "alive_until": "2016",
+    "cause": "the domain no longer resolves",
+    "snapshot": {
+      "timestamp": "20161105131314",
+      "pretty": "5 Nov 2016",
+      "first_seen": "20070608114042",
+      "first_seen_pretty": "8 Jun 2007",
+      "view_url": "https://web.archive.org/web/20161105131314/http://ffffound.com/",
+      "original": "http://ffffound.com/"
+    },
+    "title": "FFFFOUND!",
+    "own_words": "iFOUND! | iPhone application for FFFFOUND comes back to App Store!!!",
+    "afterlife": {
+      "links": [
+        {
+          "url": "https://en.wikipedia.org/wiki/FFFFOUND!",
+          "title": "FFFFOUND! - Wikipedia",
+          "query": "FFFFOUND website shutdown announcement"
+        },
+        {
+          "url": "https://medium.com/@dustinwilkie/a-retrospective-on-ffffound-15-years-later-b9b2181fb31b",
+          "title": "A FFFFOUND! Retrospective — 15 Years Later | by Dustin Wilkie",
+          "query": "FFFFOUND website shutdown announcement"
+        }
+      ],
+      "queries": [
+        "FFFFOUND website shutdown announcement"
+      ],
+      "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "candidates": 5
+    },
+    "memory": {
+      "summary": "FFFOUND! was a site where people could save images found online. An iPhone application for FFFFOUND! was once available.",
+      "epitaph": "FFFOUND!—a place to keep what caught the eye.",
+      "offering": "images",
+      "grounding": 0.7,
+      "suspects": [],
+      "temperature": 0.3,
+      "verified": true,
+      "served_by": {
+        "requested": "epitaph-chain",
+        "model": "google/gemma-3-27b-it",
+        "provider": "nebius",
+        "fallback": false,
+        "skipped": []
+      },
+      "witness": {
+        "verdict": "supported",
+        "unsupported": [],
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507"
+      }
+    },
+    "span": {
+      "days": 3438,
+      "words": "9 years"
+    }
+  },
+  {
+    "url": "https://my-first-blog.invalid/2009/hello-world",
+    "label": "A first blog post nobody saved",
+    "alive_until": null,
+    "cause": "never resolvable (reserved .invalid domain)"
+  }
+]

@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Link Rot Ofrenda</title>
+<meta name="description" content="An ofrenda for web pages that died, remembered from the Internet Archive by a local open-weight model.">
+<style>
+:root{--night:#1b1030;--plum:#2d1748;--marigold:#f5a524;--marigold2:#ff7b00;--bone:#f6ecd9;
+--rose:#e2457a;--teal:#2bb3a3;--ink:#2a1a12}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at top,#3a1f5c 0%,var(--night) 60%) fixed;color:var(--bone);
+font:17px/1.55 Georgia,'Iowan Old Style','Palatino Linotype',serif}
+.papel{display:flex;justify-content:center;gap:0;height:70px;overflow:hidden}
+.papel span{flex:1;max-width:110px;height:64px;clip-path:polygon(0 0,100% 0,100% 72%,85% 100%,70% 72%,50% 100%,30% 72%,15% 100%,0 72%);
+-webkit-mask:radial-gradient(circle at 50% 38%,transparent 9px,#000 10px);mask:radial-gradient(circle at 50% 38%,transparent 9px,#000 10px)}
+.papel span:nth-child(5n+1){background:var(--rose)}.papel span:nth-child(5n+2){background:var(--marigold)}
+.papel span:nth-child(5n+3){background:var(--teal)}.papel span:nth-child(5n+4){background:#9b5de5}.papel span:nth-child(5n){background:var(--marigold2)}
+header{text-align:center;padding:28px 20px 8px}
+h1{font-size:clamp(2rem,5vw,3.4rem);margin:.2em 0;color:var(--marigold);letter-spacing:.02em;text-shadow:0 0 18px rgba(245,165,36,.45)}
+.sub{max-width:760px;margin:0 auto;color:#e9d9bf;font-style:italic}
+.stats{margin:18px auto 0;color:#cdb8e6;font-size:.95rem}
+.altar{max-width:1100px;margin:28px auto 40px;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:46px 22px}
+.card{position:relative;background:linear-gradient(180deg,#fff8ea,#f3e3c4);color:var(--ink);border-radius:14px;padding:26px 22px 18px;
+box-shadow:0 10px 30px rgba(0,0,0,.45),0 0 0 3px var(--marigold) inset}
+.card:before{content:"";position:absolute;inset:-10px;border-radius:20px;z-index:-1;
+background:repeating-radial-gradient(circle at 10px 10px,var(--marigold) 0 6px,var(--marigold2) 7px 9px,transparent 10px 20px);opacity:.9}
+.candle{position:absolute;top:-30px;right:22px;width:16px;height:34px;background:var(--bone);border-radius:3px;box-shadow:0 0 0 2px #d8c7a6 inset}
+.candle:after{content:"";position:absolute;left:3px;top:-16px;width:10px;height:16px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;
+background:radial-gradient(circle at 50% 70%,#fff6b0,#ffb703 45%,#ff6b00 80%);box-shadow:0 0 16px 6px rgba(255,170,0,.55);animation:flick 2.4s infinite ease-in-out}
+.unlit .candle:after{display:none}
+@keyframes flick{0%,100%{transform:scale(1) rotate(-2deg)}50%{transform:scale(1.08,.94) rotate(2deg)}}
+.name{font-size:1.25rem;margin:0 0 2px;color:#5a1d3c}
+.url{font:13px/1.3 ui-monospace,Menlo,Consolas,monospace;color:#7a5a46;word-break:break-all}
+.dates{font-size:.85rem;color:#7b4b2a;margin:8px 0 10px;letter-spacing:.03em}
+.epitaph{font-size:1.12rem;font-style:italic;color:#3b1530;border-left:4px solid var(--rose);padding:2px 0 2px 12px;margin:10px 0}
+.summary{font-size:.98rem;margin:8px 0}
+.own{font-size:.95rem;margin:8px 0;color:#4d3324}
+.own b{font-variant:small-caps}
+.meta{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:.78rem;color:#6d5141;margin-top:12px;border-top:1px dashed #cfb48a;padding-top:10px}
+.tag{background:#fde2b8;border-radius:999px;padding:1px 9px}
+.tag.ok{background:#cdeedd}.tag.warn{background:#ffd3c9}
+.card a{color:#a2361b}
+.unlit{background:linear-gradient(180deg,#e8e1d6,#cfc6b8);filter:saturate(.6)}
+.unlit:before{opacity:.25}
+.refusal{font-style:italic;color:#3d3a36}
+.afterlife{font-size:.88rem;margin:8px 0 0;color:#4d3324}
+.afterlife a{display:inline-block;margin-right:8px}
+.who{font-size:.74rem;color:#7a5a46;margin-top:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.objection{font-size:.8rem;color:#8a2b1b;margin:4px 0}
+footer{max-width:820px;margin:0 auto 50px;padding:0 18px;color:#cdb8e6;font-size:.9rem;text-align:center}
+footer a{color:var(--marigold)}
+</style></head>
+<body>
+<div class="papel" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<header>
+  <h1>&#127804; Link Rot Ofrenda &#127804;</h1>
+  <p class="sub">For the pages that are gone. Each one is remembered from its last snapshot in the Internet Archive. Open-weight models reached through <a href="https://otari.ai" style="color:var(--marigold)">Otari</a>, Mozilla.ai's AI gateway, did the work: Gemma wrote, a second model checked every summary against the archived text, a third searched the web for where each story lives now, and the numbers were computed in a sandbox and re-checked. Nothing here was written from memory.</p>
+  <p class="stats">9 candles lit &middot; 1 left unlit for lack of memory &middot; built 31 Oct 2026 &middot; $0.0115 of model time via Otari</p>
+</header>
+<main class="altar">
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">GeoCities: the SiliconValley neighbourhood</h2>
+  <div class="url">http://www.geocities.com/SiliconValley/</div>
+  <div class="dates">address first archived 21 Dec 1996 &middot; last remembered 9 Oct 1999 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 2 years 9 months</span></div>
+  <p class="epitaph">GeoCities SiliconValley: a place to build a free home.</p>
+  <p class="summary">This page offered free home pages and invited visitors to explore neighborhoods. It also provided access to Yahoo! resources, clubs, and user groups.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/GeoCities" title="found by Otari web search: https://en.wikipedia.org/wiki/GeoCities">GeoCities - Wikipedia</a> <a href="https://www.webdesignmuseum.org/exhibitions/geocities-neighborhoods" title="found by Otari web search: https://www.webdesignmuseum.org/exhibitions/geocities-neighborhoods">GeoCities Neighborhoods - Web Design Museum</a></p>
+  <div class="meta">
+    <span class="tag">offering: home page</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 83%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the server answers HTTP 404</span>
+    
+    <a href="https://web.archive.org/web/19991009015113/http://www6.geocities.com:80/SiliconValley/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Pownce</h2>
+  <div class="url">http://www.pownce.com/</div>
+  <div class="dates">address first archived 28 Jun 2007 &middot; last remembered 29 Dec 2008 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 1 year 6 months</span></div>
+  <p class="epitaph">Pownce: For the friendships made and the sharing we knew.</p>
+  <p class="summary">Pownce allowed people to meet and know wonderful people and share stuff together. The engineering team and technology are now a part of Six Apart.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/Pownce" title="found by Otari web search: https://en.wikipedia.org/wiki/Pownce">Pownce - Wikipedia</a> <a href="https://venturebeat.com/business/six-apart-acquires-and-shuts-down-pownce" title="found by Otari web search: https://venturebeat.com/business/six-apart-acquires-and-shuts-down-pownce">Six Apart acquires and shuts down Pownce | VentureBeat</a></p>
+  <div class="meta">
+    <span class="tag">offering: shares</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 87%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the domain no longer resolves</span>
+    
+    <a href="https://web.archive.org/web/20081229052219/http://pownce.com:80/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Jaiku</h2>
+  <div class="url">http://www.jaiku.com/</div>
+  <div class="dates">address first archived 20 Jul 2001 &middot; last remembered 30 Dec 2009 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 8 years</span></div>
+  <p class="epitaph">Jaiku: a space for your conversation, now quiet.</p>
+  <p class="summary">Jaiku allowed users to create their own microblog and connect with friends. Visitors could post from the web, by SMS, or from desktop clients, creating their own activity stream.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="http://taggedwiki.zubiaga.org/new_content/ec78182cf3aec2bc84de842ccf3775d1" title="found by Otari web search: http://taggedwiki.zubiaga.org/new_content/ec78182cf3aec2bc84de842ccf3775d1">Jaiku - Wikipedia, the free encyclopedia</a> <a href="https://www.failory.com/google/jaiku" title="found by Otari web search: https://www.failory.com/google/jaiku">What Was Jaiku and Why Was it Discontinued?</a></p>
+  <div class="meta">
+    <span class="tag">offering: icons</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 79%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the server answers HTTP 404</span>
+    
+    <a href="https://web.archive.org/web/20091230103428/http://www.jaiku.com:80/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Google Reader</h2>
+  <div class="url">http://www.google.com/reader/about/</div>
+  <div class="dates">address first archived 2 Jul 2013 &middot; last remembered 31 Dec 2013 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 6 months</span></div>
+  <p class="epitaph">Google Reader: For lists of people you followed, rest in peace.</p>
+  <p class="summary">This page announced that Google Reader has been discontinued. It thanked loyal fans and offered a link to frequently-asked questions about data deletion.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/Google_Reader" title="found by Otari web search: https://en.wikipedia.org/wiki/Google_Reader">Google Reader - Wikipedia</a></p>
+  <div class="meta">
+    <span class="tag">offering: subscriptions</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 85%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the server answers HTTP 404</span>
+    
+    <a href="https://web.archive.org/web/20131231184531/http://www.google.com/reader/about/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Posterous</h2>
+  <div class="url">http://www.posterous.com/</div>
+  <div class="dates">address first archived 24 Apr 2008 &middot; last remembered 31 Dec 2012 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 4 years 8 months</span></div>
+  <p class="epitaph">Posterous: A space to share, and to be seen.</p>
+  <p class="summary">Posterous Spaces was the easiest way to share safely online. Millions of users were sharing smarter with Posterous Spaces, from personal blogs to business websites.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/Posterous" title="found by Otari web search: https://en.wikipedia.org/wiki/Posterous">Posterous - Wikipedia</a> <a href="https://startups.rip/company/posterous" title="found by Otari web search: https://startups.rip/company/posterous">Posterous (S08): Acquisition History and Rebuild Plan - Startups.RIP</a></p>
+  <div class="meta">
+    <span class="tag">offering: photos</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 100%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the server answers HTTP 404</span>
+    
+    <a href="https://web.archive.org/web/20121231231902/https://posterous.com/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Gowalla</h2>
+  <div class="url">http://www.gowalla.com/</div>
+  <div class="dates">address first archived 8 Feb 2009 &middot; last remembered 31 Dec 2011 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 2 years 10 months</span></div>
+  <p class="epitaph">Gowalla: a place to share what you loved.</p>
+  <p class="summary">Gowalla let users discover loved places and share the places that meant the world to them. Visitors could browse guides and share stories, photos, and favorite places on the go.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/Gowalla" title="found by Otari web search: https://en.wikipedia.org/wiki/Gowalla">Gowalla - Wikipedia</a></p>
+  <div class="meta">
+    <span class="tag">offering: photos</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 88%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the server answers HTTP 404</span>
+    
+    <a href="https://web.archive.org/web/20111231203528/http://gowalla.com/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Grooveshark</h2>
+  <div class="url">http://www.grooveshark.com/</div>
+  <div class="dates">address first archived 14 Jul 2006 &middot; last remembered 31 Dec 2014 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 8 years</span></div>
+  <p class="epitaph">Grooveshark: a stream of music for all who listened.</p>
+  <p class="summary">Grooveshark offered free music, online radio, and internet streaming. Visitors could enjoy unlimited free music streaming with a worldwide community of artists and music lovers.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/Grooveshark" title="found by Otari web search: https://en.wikipedia.org/wiki/Grooveshark">Grooveshark - Wikipedia</a> <a href="https://www.billboard.com/pro/grooveshark-to-shut-down" title="found by Otari web search: https://www.billboard.com/pro/grooveshark-to-shut-down">Grooveshark Shuts Down - Billboard</a></p>
+  <div class="meta">
+    <span class="tag">offering: music</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 94%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the domain no longer resolves</span>
+    
+    <a href="https://web.archive.org/web/20141231124440/http://grooveshark.com/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">Rdio</h2>
+  <div class="url">http://www.rdio.com/</div>
+  <div class="dates">address first archived 29 Mar 2002 &middot; last remembered 31 Dec 2012 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 10 years</span></div>
+  <p class="epitaph">Rdio: a library of millions, and a way to find what to listen to next.</p>
+  <p class="summary">Rdio let you listen to millions of songs ad-free, wherever you are. It was about human powered music discovery and collecting and sharing the music you love.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://www.theverge.com/2015/11/20/9772784/rdio-shutdown-free-tier-pandora-acquisition" title="found by Otari web search: https://www.theverge.com/2015/11/20/9772784/rdio-shutdown-free-tier-pandora-acquisition">Rdio’s shutdown begins November 23rd with a transition to ad-supported listening | The Verge</a> <a href="https://www.cultofmac.com/news/rdio-shutdown" title="found by Otari web search: https://www.cultofmac.com/news/rdio-shutdown">Rdio marches to death playing the high notes</a></p>
+  <div class="meta">
+    <span class="tag">offering: playlists</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 93%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the domain no longer resolves</span>
+    
+    <a href="https://web.archive.org/web/20121231193838/http://www.rdio.com/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">FFFFOUND!</h2>
+  <div class="url">http://ffffound.com/</div>
+  <div class="dates">address first archived 8 Jun 2007 &middot; last remembered 5 Nov 2016 &middot; <span title="computed in Otari's code sandbox and re-checked locally">archived across 9 years</span></div>
+  <p class="epitaph">FFFOUND!—a place to keep what caught the eye.</p>
+  <p class="summary">FFFOUND! was a site where people could save images found online. An iPhone application for FFFFOUND! was once available.</p>
+  <p class="afterlife"><b>Its story lives on:</b> <a href="https://en.wikipedia.org/wiki/FFFFOUND!" title="found by Otari web search: https://en.wikipedia.org/wiki/FFFFOUND!">FFFFOUND! - Wikipedia</a> <a href="https://medium.com/@dustinwilkie/a-retrospective-on-ffffound-15-years-later-b9b2181fb31b" title="found by Otari web search: https://medium.com/@dustinwilkie/a-retrospective-on-ffffound-15-years-later-b9b2181fb31b">A FFFFOUND! Retrospective — 15 Years Later | by Dustin Wilkie</a></p>
+  <div class="meta">
+    <span class="tag">offering: images</span>
+    <span class="tag ok" title="share of summary words found in the archived text">grounded 70%</span> <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>
+    <span class="tag">the domain no longer resolves</span>
+    
+    <a href="https://web.archive.org/web/20161105131314/http://ffffound.com/">visit the snapshot &rarr;</a>
+  </div>
+  <div class="who">written by google/gemma-3-27b-it on nebius via Otari &middot; checked by Qwen/Qwen3-30B-A3B-Instruct-2507</div>
+</article>
+
+<article class="card unlit">
+  <div class="candle" aria-hidden="true"></div>
+  <h2 class="name">A first blog post nobody saved</h2>
+  <div class="url">https://my-first-blog.invalid/2009/hello-world</div>
+  <div class="dates">no snapshot in the Internet Archive</div>
+  <p class="refusal">We found no memory of this page, so we will not invent one.
+  This candle stays unlit until someone brings a real photograph.</p>
+  <div class="meta"><span class="tag">never resolvable (reserved .invalid domain)</span></div>
+</article>
+</main>
+<footer>
+  <p>Made with <a href="https://github.com/meerpasha59-bit/link-rot-ofrenda">link-rot-ofrenda</a>.
+  Snapshots courtesy of the <a href="https://web.archive.org/">Internet Archive's Wayback Machine</a>.
+  Summaries are checked against the archived text; where the model strayed, the page speaks in its own words instead. Models served through <a href="https://github.com/mozilla-ai/otari">Otari</a>; every link under &ldquo;its story lives on&rdquo; came from Otari's web search results, never from a model's memory.</p>
+</footer>
+</body></html>
