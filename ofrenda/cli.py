@@ -97,6 +97,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--archivist", default=os.environ.get("OFRENDA_ARCHIVIST", "alibaba/qwen3-235b-a22b-instruct-2507"),
                     help="otari only: open-weight model that uses Otari web search to find where a dead page's "
                          "story lives now ('none' to skip)")
+    ap.add_argument("--lookup", choices=["cdx", "mcp"], default="cdx",
+                    help="otari only: 'cdx' asks the Wayback CDX API first and the Internet Archive MCP server "
+                         "(through Otari) only if that fails; 'mcp' asks the MCP server first")
+    ap.add_argument("--ia-mcp", default=os.environ.get("OFRENDA_IA_MCP", "https://internet-archive.caseyjhand.com/mcp"),
+                    help="otari only: Streamable-HTTP URL of an Internet Archive MCP server")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -142,7 +147,24 @@ def main(argv: list[str] | None = None) -> int:
             saved = json.loads(lookup.read_text(encoding="utf-8"))
             snap = Snapshot(**saved) if saved else None
         else:
-            snap = find_snapshot(url, item["alive_until"])
+            snap = None if (client is not None and a.lookup == "mcp") else find_snapshot(url, item["alive_until"])
+            if snap is None and client is not None and a.archivist != "none":
+                from .ia_mcp import lookup_via_mcp
+                lead, how = lookup_via_mcp(client, a.archivist, url, item["alive_until"], a.ia_mcp)
+                if lead is not None:
+                    try:  # the MCP answer is a lead; believe it only if the snapshot really loads
+                        page_check = fetch_archived_html(lead)
+                    except Exception:
+                        page_check = ""
+                    if len(page_check) > 200:
+                        snap = lead
+                        entry["found_via"] = "Internet Archive MCP server via Otari"
+                        print(c(GREY, f"      MCP lead       : {lead.timestamp} from {how.get('model')} -> verified by fetching it"))
+                    else:
+                        print(c(ROSE, f"      MCP lead       : {lead.timestamp} did not load; ignored"))
+                else:
+                    print(c(GREY, "      MCP lookup     : no successful capture reported"
+                                  + (f" ({how['error'][:60]})" if how.get("error") else "")))
             if snap:  # never cache a miss: the archive may just have been down
                 lookup.write_text(json.dumps(snap.__dict__), encoding="utf-8")
         if not snap:
