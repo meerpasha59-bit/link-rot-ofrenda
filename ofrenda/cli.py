@@ -263,6 +263,10 @@ def main(argv: list[str] | None = None) -> int:
                    "verified": False, "budget": budget_hit}
             print(c(ROSE, f"      budget reached : {budget_hit}. No model asked; the page speaks for itself."))
         entry["memory"] = mem
+        if mem.get("budget"):
+            print()
+            entries.append(entry)
+            continue
         status = c(GREEN, "grounded") if mem.get("verified") else c(ROSE, "withheld, quoting the page instead")
         print(c(ROSE, f"      epitaph        : {mem.get('epitaph', '')}"))
         if mem.get("verified"):
