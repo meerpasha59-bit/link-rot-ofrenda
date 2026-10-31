@@ -17,6 +17,8 @@ export OTARI_API_KEY=otk_...        # workspace key from otari.ai → API keys (
 python -m ofrenda examples/lost-links.txt --backend otari -o docs/otari/index.html
 ```
 
+**Demo video (3:53):** https://drive.google.com/file/d/1YGiDak14xzMmNkvqbhVJZSE3auj4sxN-/view?usp=sharing
+
 Result of a real run: [`docs/otari/index.html`](docs/otari/index.html) (terminal output in [`examples/otari-run.txt`](examples/otari-run.txt), per-call ledger in [`docs/otari/otari-ledger.json`](docs/otari/otari-ledger.json)). A fresh run of the 10 sample links (nothing cached) made 26 gateway calls and cost $0.084, most of it the flat fee for each web search; a re-run that reuses the cached, already-verified search results made 20 calls and cost $0.012.
 
 ### Who does what
