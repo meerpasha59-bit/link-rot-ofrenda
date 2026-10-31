@@ -151,3 +151,51 @@ class OtariModel:
         )
         self.last = call
         return Otari.text(data)
+
+
+class FallbackModel:
+    """Try a chain of Otari models in order until one gives a usable answer.
+
+    Two layers of routing work together here:
+
+    * the first entry is normally an Otari *routing policy* (``epitaph-chain``
+      in our workspace: Gemma 3 27B, then Mistral Small), so the gateway itself
+      fails over between models and providers, and also falls back
+      automatically between providers of one catalog model;
+    * if the gateway still refuses (the policy does not exist in your
+      workspace, a provider is down, a model returns junk), this class moves to
+      the next model in the chain on the client side.
+
+    A spent budget is never "fallen back" around: it stops the run.
+    """
+
+    def __init__(self, client: Otari, chain: list[str], temperature: float = 0.3,
+                 max_tokens: int = 220, role: str = "scribe", system: str | None = None):
+        self.links = [OtariModel(client, m, temperature, max_tokens, role, system) for m in chain]
+        self.model = chain[0]
+        self.temperature = temperature
+        self.last: Call | None = None
+        self.skipped: list[str] = []
+
+    def chat(self, user: str, temperature: float | None = None) -> str:
+        from .model import parse_json
+        last_err: Exception | None = None
+        self.skipped = []
+        for link in self.links:
+            try:
+                out = link.chat(user, temperature)
+            except OtariError as e:
+                if e.budget_exhausted:
+                    raise
+                last_err = e
+                self.skipped.append(f"{link.model}: {e.detail[:80]}")
+                continue
+            self.last = link.last
+            if parse_json(out) is not None or link is self.links[-1]:
+                if self.skipped and self.last is not None:
+                    self.last.fallback = True  # client-side fallback happened
+                return out
+            self.skipped.append(f"{link.model}: no usable JSON")
+        if last_err:
+            raise last_err
+        return ""

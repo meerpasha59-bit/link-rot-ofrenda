@@ -86,6 +86,11 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--model", default=os.environ.get("OFRENDA_MODEL"),
                     help="model name to request and to credit on the page (default gemma-3-1b-it locally, "
                          "google/gemma-3-27b-it on Otari; e.g. gemma3:1b for Ollama)")
+    ap.add_argument("--scribe-chain", default=os.environ.get(
+                        "OFRENDA_SCRIBE_CHAIN",
+                        "epitaph-chain,google/gemma-3-27b-it,mistralai/ministral-3-14b"),
+                    help="otari only: comma-separated models/routing policies tried in order for the epitaphs "
+                         "(an Otari routing policy name first, then catalog ids as client-side fallbacks)")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -98,10 +103,14 @@ def main(argv: list[str] | None = None) -> int:
     cache = Path(a.cache)
     cache.mkdir(parents=True, exist_ok=True)
     if a.backend == "otari":
-        from .otari import Otari, OtariModel
-        a.model = a.model or "google/gemma-3-27b-it"
+        from .otari import FallbackModel, Otari, OtariModel
         client = Otari(session_label=f"ofrenda-{time.strftime('%Y%m%d-%H%M%S')}")
-        llm = OtariModel(client, a.model, temperature=a.temperature)
+        if a.model:  # one explicit model: no chain
+            llm = OtariModel(client, a.model, temperature=a.temperature)
+        else:
+            chain = [m.strip() for m in a.scribe_chain.split(",") if m.strip()]
+            llm = FallbackModel(client, chain, temperature=a.temperature)
+            a.model = " → ".join(chain)
         a.endpoint = client.base
     else:
         a.model = a.model or "gemma-3-1b-it"
@@ -172,8 +181,12 @@ def main(argv: list[str] | None = None) -> int:
         t = time.time()
         mem = remember(llm, url, pretty_ts(snap.timestamp), info["title"], source, name=item["label"])
         if client is not None and llm.last is not None:
-            mem["served_by"] = {"model": llm.last.served_model, "provider": llm.last.provider,
-                                "fallback": llm.last.fallback}
+            mem["served_by"] = {"requested": llm.last.requested, "model": llm.last.served_model,
+                                "provider": llm.last.provider, "fallback": llm.last.fallback,
+                                "skipped": list(getattr(llm, "skipped", []))}
+            sb = mem["served_by"]
+            print(c(GREY, f"      written by     : {sb['model']} on {sb['provider']} via Otari"
+                          f" (asked for {sb['requested']}{', fell back' if sb['fallback'] else ''})"))
         entry["memory"] = mem
         status = c(GREEN, "grounded") if mem.get("verified") else c(ROSE, "withheld, quoting the page instead")
         print(c(ROSE, f"      epitaph        : {mem.get('epitaph', '')}"))
