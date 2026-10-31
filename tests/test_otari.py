@@ -48,3 +48,22 @@ class FallbackTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class WitnessTest(unittest.TestCase):
+    def _w(self, answer, summary="Grooveshark offered free music streaming."):
+        from ofrenda.witness import cross_examine
+        fake = FakeClient({"w": answer})
+        return cross_examine(fake, "w", summary, "Grooveshark is free music streaming.")
+
+    def test_objection_is_kept_when_it_quotes_the_summary(self):
+        out = self._w('{"unsupported": ["free music streaming"], "verdict": "unsupported"}')
+        self.assertEqual(out["verdict"], "unsupported")
+
+    def test_witness_cannot_object_to_words_that_are_not_there(self):
+        out = self._w('{"unsupported": ["founded in 2006"], "verdict": "unsupported"}')
+        self.assertEqual(out["verdict"], "supported")
+        self.assertEqual(out["unsupported"], [])
+
+    def test_garbled_witness_is_reported_unavailable(self):
+        self.assertEqual(self._w("hmm")["verdict"], "unavailable")
