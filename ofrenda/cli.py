@@ -94,6 +94,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--witness", default=os.environ.get("OFRENDA_WITNESS", "alibaba/qwen3-30b-a3b-instruct-2507"),
                     help="otari only: a second open-weight model that must agree each summary is supported "
                          "by the archived text ('none' to skip)")
+    ap.add_argument("--archivist", default=os.environ.get("OFRENDA_ARCHIVIST", "alibaba/qwen3-235b-a22b-instruct-2507"),
+                    help="otari only: open-weight model that uses Otari web search to find where a dead page's "
+                         "story lives now ('none' to skip)")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -200,6 +203,22 @@ def main(argv: list[str] | None = None) -> int:
                               + "; ".join(f"“{p}”" for p in w["unsupported"])))
             else:
                 print(c(GREY, f"      witness        : {w['model']} -> {w['verdict']}"))
+        if client is not None and a.archivist != "none":
+            from .afterlife import find_afterlife
+            akey = cache / ("afterlife-" + hashlib.sha1(url.encode()).hexdigest()[:16] + ".json")
+            if akey.exists():
+                after = json.loads(akey.read_text(encoding="utf-8"))
+            else:
+                after = find_afterlife(client, a.archivist, item["label"] or info["title"] or url, url,
+                                       pretty_ts(snap.timestamp))
+                if after.get("links"):
+                    akey.write_text(json.dumps(after), encoding="utf-8")
+            entry["afterlife"] = after
+            for link in after.get("links", []):
+                print(c(GREEN, f"      lives on at    : {link['url']}") + c(DIM, f"  ({link['title'][:50]})"))
+            if not after.get("links"):
+                print(c(GREY, "      lives on at    : nothing verifiable found; leaving it blank"
+                              + (f" ({after['error'][:60]})" if after.get("error") else "")))
         entry["memory"] = mem
         status = c(GREEN, "grounded") if mem.get("verified") else c(ROSE, "withheld, quoting the page instead")
         print(c(ROSE, f"      epitaph        : {mem.get('epitaph', '')}"))

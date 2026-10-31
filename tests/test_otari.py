@@ -67,3 +67,22 @@ class WitnessTest(unittest.TestCase):
 
     def test_garbled_witness_is_reported_unavailable(self):
         self.assertEqual(self._w("hmm")["verdict"], "unavailable")
+
+
+class AfterlifeTest(unittest.TestCase):
+    TOOLS = [{"type": "web_search", "status": "completed", "query": "Pownce shut down",
+              "sources": [{"url": "https://en.wikipedia.org/wiki/Pownce", "title": "Pownce - Wikipedia"},
+                          {"url": "http://pownce.com/", "title": "Pownce"},
+                          {"url": "https://web.archive.org/web/2008/http://pownce.com/", "title": "Pownce (archived)"}]}]
+
+    def test_only_urls_the_search_returned_survive(self):
+        from ofrenda.afterlife import verified_links
+        answer = '{"links": ["https://en.wikipedia.org/wiki/Pownce/", "https://pownce-memorial.example/"]}'
+        links = verified_links(answer, self.TOOLS, "http://www.pownce.com/")
+        self.assertEqual([l["url"] for l in links], ["https://en.wikipedia.org/wiki/Pownce"])
+        self.assertEqual(links[0]["title"], "Pownce - Wikipedia")  # the source's title, not the model's
+
+    def test_the_dead_site_and_its_snapshots_are_not_an_afterlife(self):
+        from ofrenda.afterlife import verified_links
+        answer = '{"links": ["http://pownce.com/", "https://web.archive.org/web/2008/http://pownce.com/"]}'
+        self.assertEqual(verified_links(answer, self.TOOLS, "http://www.pownce.com/"), [])
