@@ -43,6 +43,10 @@ background:radial-gradient(circle at 50% 70%,#fff6b0,#ffb703 45%,#ff6b00 80%);bo
 .unlit{background:linear-gradient(180deg,#e8e1d6,#cfc6b8);filter:saturate(.6)}
 .unlit:before{opacity:.25}
 .refusal{font-style:italic;color:#3d3a36}
+.afterlife{font-size:.88rem;margin:8px 0 0;color:#4d3324}
+.afterlife a{display:inline-block;margin-right:8px}
+.who{font-size:.74rem;color:#7a5a46;margin-top:6px;font-family:ui-monospace,Menlo,Consolas,monospace}
+.objection{font-size:.8rem;color:#8a2b1b;margin:4px 0}
 footer{max-width:820px;margin:0 auto 50px;padding:0 18px;color:#cdb8e6;font-size:.9rem;text-align:center}
 footer a{color:var(--marigold)}
 """
@@ -66,9 +70,22 @@ def card(entry: dict) -> str:
 </article>"""
     snap = entry["snapshot"]
     mem = entry.get("memory", {})
+    w = mem.get("witness") or {}
     if mem.get("verified"):
         summary = f'<p class="summary">{_e(mem["summary"])}</p>'
         badge = f'<span class="tag ok" title="share of summary words found in the archived text">grounded {int(mem["grounding"]*100)}%</span>'
+        if w.get("verdict") == "supported":
+            badge += f' <span class="tag ok" title="an independent open-weight model found every claim in the archived text">witness agrees</span>'
+    elif mem.get("budget"):
+        quote = entry.get("own_words") or "(the archived text was too thin to quote)"
+        summary = f'<p class="own"><b>In its own words:</b> &ldquo;{_e(quote.strip())}&rdquo;</p>'
+        badge = '<span class="tag warn" title="the spend limit was reached before a model was asked">budget reached: no model text</span>'
+    elif w.get("verdict") == "unsupported":
+        quote = entry.get("own_words") or "(the archived text was too thin to quote)"
+        summary = (f'<p class="own"><b>In its own words:</b> &ldquo;{_e(quote.strip())}&rdquo;</p>'
+                   f'<p class="objection">The witness ({_e(w.get("model"))}) objected to: '
+                   + "; ".join(f"&ldquo;{_e(x)}&rdquo;" for x in w.get("unsupported", [])) + '</p>')
+        badge = '<span class="tag warn" title="a second model found claims the archived text does not support">summary withheld by the witness</span>'
     else:
         quote = entry.get("own_words") or "(the archived text was too thin to quote)"
         summary = f'<p class="own"><b>In its own words:</b> &ldquo;{_e(quote.strip())}&rdquo;</p>'
@@ -76,6 +93,24 @@ def card(entry: dict) -> str:
     first = ""
     if snap.get("first_seen"):
         first = f"address first archived {_e(snap['first_seen_pretty'])} &middot; "
+    span = ""
+    if entry.get("span"):
+        span = (f' &middot; <span title="computed in Otari\'s code sandbox and re-checked locally">'
+                f'archived across {_e(entry["span"]["words"])}</span>')
+    links = (entry.get("afterlife") or {}).get("links") or []
+    afterlife = ""
+    if links:
+        afterlife = ('<p class="afterlife"><b>Its story lives on:</b> '
+                     + " ".join(f'<a href="{_e(l["url"])}" title="found by Otari web search: {_e(l["url"])}">{_e(l["title"] or l["url"])}</a>'
+                                for l in links) + '</p>')
+    sb = mem.get("served_by") or {}
+    who = ""
+    if sb.get("model"):
+        who = (f'<div class="who">written by {_e(sb["model"])} on {_e(sb.get("provider"))} via Otari'
+               + (" (fallback)" if sb.get("fallback") else "")
+               + (f' &middot; checked by {_e(w.get("model"))}' if w.get("model") and w.get("verdict") != "unavailable" else "")
+               + '</div>')
+    found = '<span class="tag">found via Internet Archive MCP</span>' if entry.get("found_via") else ""
     offering = mem.get("offering", "").rstrip(".")
     if len(offering.split()) > 4:  # the prompt asks for 1-3 words; skip rambling ones
         offering = ""
@@ -84,23 +119,41 @@ def card(entry: dict) -> str:
   <div class="candle" aria-hidden="true"></div>
   <h2 class="name">{_e(entry.get('label') or entry.get('title') or entry['url'])}</h2>
   <div class="url">{_e(entry['url'])}</div>
-  <div class="dates">{first}last remembered {_e(snap['pretty'])}</div>
-  <p class="epitaph">{_e(mem.get('epitaph', ''))}</p>
+  <div class="dates">{first}last remembered {_e(snap['pretty'])}{span}</div>
+  {'<p class="epitaph">' + _e(mem.get('epitaph')) + '</p>' if mem.get('epitaph') else ''}
   {summary}
+  {afterlife}
   <div class="meta">
     {'<span class="tag">offering: ' + _e(offering) + '</span>' if offering else ''}
     {badge}
     <span class="tag">{_e(entry.get('cause', ''))}</span>
+    {found}
     <a href="{_e(snap['view_url'])}">visit the snapshot &rarr;</a>
   </div>
+  {who}
 </article>"""
 
 
-def render(entries: list[dict], model_name: str, title: str = "Link Rot Ofrenda") -> str:
+def render(entries: list[dict], model_name: str, title: str = "Link Rot Ofrenda",
+           backend: str = "local", spent: float | None = None) -> str:
     lit = sum(1 for e in entries if e.get("snapshot"))
     when = datetime.now(timezone.utc).strftime("%d %b %Y")
     cards = "\n".join(card(e) for e in entries)
     papel = "<span></span>" * 14
+    if backend == "otari":
+        intro = ("<p class=\"sub\">For the pages that are gone. Each one is remembered from its last snapshot in the "
+                 "Internet Archive. Open-weight models reached through <a href=\"https://otari.ai\" style=\"color:var(--marigold)\">Otari</a>, "
+                 "Mozilla.ai's AI gateway, did the work: Gemma wrote, a second model checked every summary against the archived text, "
+                 "a third searched the web for where each story lives now, and the numbers were computed in a sandbox and re-checked. "
+                 "Nothing here was written from memory.</p>")
+    else:
+        intro = (f"<p class=\"sub\">For the pages that are gone. Each one is remembered from its last snapshot in the "
+                 f"Internet Archive, and the words were written by <b>{_e(model_name)}</b>, an open-weight model running "
+                 f"locally on a CPU, using only what the archive kept.</p>")
+    otari_note = (" Models served through <a href=\"https://github.com/mozilla-ai/otari\">Otari</a>; "
+                  "every link under &ldquo;its story lives on&rdquo; came from Otari's web search results, never from a model's memory."
+                  if backend == "otari" else "")
+    cost = f" &middot; ${spent:.4f} of model time via Otari" if spent is not None else ""
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -111,10 +164,8 @@ def render(entries: list[dict], model_name: str, title: str = "Link Rot Ofrenda"
 <div class="papel" aria-hidden="true">{papel}</div>
 <header>
   <h1>&#127804; {_e(title)} &#127804;</h1>
-  <p class="sub">For the pages that are gone. Each one is remembered from its last snapshot in the
-  Internet Archive, and the words were written by <b>{_e(model_name)}</b>, an open-weight model running
-  locally on a CPU, using only what the archive kept.</p>
-  <p class="stats">{lit} candles lit &middot; {len(entries) - lit} left unlit for lack of memory &middot; built {when}</p>
+  {intro}
+  <p class="stats">{lit} candles lit &middot; {len(entries) - lit} left unlit for lack of memory &middot; built {when}{cost}</p>
 </header>
 <main class="altar">
 {cards}
@@ -122,6 +173,6 @@ def render(entries: list[dict], model_name: str, title: str = "Link Rot Ofrenda"
 <footer>
   <p>Made with <a href="https://github.com/meerpasha59-bit/link-rot-ofrenda">link-rot-ofrenda</a>.
   Snapshots courtesy of the <a href="https://web.archive.org/">Internet Archive's Wayback Machine</a>.
-  Summaries are checked against the archived text; where the model strayed, the page speaks in its own words instead.</p>
+  Summaries are checked against the archived text; where the model strayed, the page speaks in its own words instead.{otari_note}</p>
 </footer>
 </body></html>"""

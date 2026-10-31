@@ -118,3 +118,20 @@ class SpendCapTest(unittest.TestCase):
         with self.assertRaises(OtariError) as ctx:
             client.chat("scribe", "m", [{"role": "user", "content": "hi"}])
         self.assertTrue(ctx.exception.budget_exhausted)
+
+
+class RenderTest(unittest.TestCase):
+    def test_otari_card_credits_models_and_shows_withheld_reason(self):
+        from ofrenda.render import render
+        e = {"url": "http://x.invalid/", "label": "X", "cause": "gone", "own_words": "X was a place.",
+             "snapshot": {"timestamp": "20080101000000", "pretty": "1 Jan 2008", "view_url": "https://web.archive.org/web/2008/x"},
+             "memory": {"summary": "X explained why it closed.", "epitaph": "Farewell, X.", "offering": "",
+                        "grounding": 0.6, "suspects": [], "verified": False,
+                        "served_by": {"model": "google/gemma-3-27b-it", "provider": "nebius"},
+                        "witness": {"verdict": "unsupported", "unsupported": ["explained why it closed"], "model": "qwen"}},
+             "afterlife": {"links": [{"url": "https://en.wikipedia.org/wiki/X", "title": "X - Wikipedia"}]}}
+        html = render([e], "chain", backend="otari", spent=0.01)
+        self.assertIn("summary withheld by the witness", html)
+        self.assertNotIn(">X explained why it closed.<", html)
+        self.assertIn("X - Wikipedia", html)
+        self.assertIn("google/gemma-3-27b-it on nebius via Otari", html)

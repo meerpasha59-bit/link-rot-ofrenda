@@ -290,7 +290,8 @@ def main(argv: list[str] | None = None) -> int:
 
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(render(entries, a.model, a.title), encoding="utf-8")
+    out.write_text(render(entries, a.model, a.title, backend=a.backend,
+                                spent=client.spent if client is not None else None), encoding="utf-8")
     json_path = Path(a.json) if a.json else out.with_name("ofrenda.json")
     json_path.write_text(json.dumps(entries, indent=2, ensure_ascii=False), encoding="utf-8")
     lit = sum(1 for e in entries if e.get("snapshot"))
