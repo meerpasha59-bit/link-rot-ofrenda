@@ -22,6 +22,9 @@ WITNESS_SYSTEM = (
     "You are a strict fact-checker for an archive. You compare a short summary with the "
     "source text it was written from. A claim is supported only if the source text states "
     "it or directly implies it. General tone words (warm, beloved) are not claims. "
+    "If the summary says the page explains, describes, lists or answers something, the source "
+    "must actually contain that explanation or content; a heading, a question or a link pointing "
+    "elsewhere does not count. "
     "Answer with JSON only."
 )
 

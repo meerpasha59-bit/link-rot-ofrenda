@@ -1,0 +1,19 @@
+- GeoCities: the SiliconValley neighbourhood: supported
+    summary : This page offered free home pages for a neighborhood called SiliconValley.
+- Pownce: supported
+    summary : The Pownce page details the closure of the platform and expresses gratitude for its users.
+- Jaiku: supported
+    summary : The page offers a platform for users to create and share conversations, primarily through text-based updates and interactions.
+- Google Reader: OBJECTS
+    summary : This page details the discontinuation of Google Reader, explaining the reasons behind the decision.
+    unsupported: “explaining the reasons behind the decision”
+- Posterous: supported
+    summary : This page details the functionality of Posterous Spaces, a platform for sharing and managing multiple online spaces.
+- Gowalla: supported
+    summary : This page offers a platform for sharing and discovering places of interest, primarily focusing on locations and experiences.
+- Grooveshark: supported
+    summary : This page describes Grooveshark, a free music streaming service.
+- Rdio: supported
+    summary : The page describes Rdio, a music streaming service offering millions of songs available on web, phone, and offline, with a focus on discovery and sharing.
+
+8 witness calls through Otari, $0.00035
