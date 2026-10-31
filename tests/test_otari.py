@@ -106,3 +106,15 @@ class ReckonerTest(unittest.TestCase):
         from ofrenda.reckoner import span_words
         self.assertEqual(span_words(550), "1 year 6 months")
         self.assertEqual(span_words(12), "12 days")
+
+
+class SpendCapTest(unittest.TestCase):
+    def test_local_cap_refuses_before_calling(self):
+        import os
+        from ofrenda.otari import Otari
+        os.environ.setdefault("OTARI_API_KEY", "test-not-a-real-key")
+        client = Otari(max_spend=0.01)
+        client.calls.append(Call(role="scribe", requested="m", cost_usd=0.02))
+        with self.assertRaises(OtariError) as ctx:
+            client.chat("scribe", "m", [{"role": "user", "content": "hi"}])
+        self.assertTrue(ctx.exception.budget_exhausted)

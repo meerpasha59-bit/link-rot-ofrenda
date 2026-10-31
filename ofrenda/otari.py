@@ -57,7 +57,8 @@ class Call:
 
 class Otari:
     def __init__(self, api_key: str | None = None, base: str | None = None,
-                 timeout: float = 150, session_label: str | None = None):
+                 timeout: float = 150, session_label: str | None = None,
+                 max_spend: float | None = None):
         self.api_key = api_key or os.environ.get("OTARI_API_KEY", "")
         if not self.api_key:
             raise SystemExit("OTARI_API_KEY is not set. Create a key at https://otari.ai "
@@ -66,6 +67,9 @@ class Otari:
         self.timeout = timeout
         self.session_label = session_label
         self.calls: list[Call] = []
+        # A client-side cap on top of the workspace budget/ceiling set in the Otari
+        # dashboard: whichever runs out first stops the run.
+        self.max_spend = max_spend
 
     # ------------------------------------------------------------------ spend
     @property
@@ -78,6 +82,8 @@ class Otari:
     # ------------------------------------------------------------------- core
     def chat(self, role: str, model: str, messages: list[dict], **params) -> tuple[dict, Call]:
         """One chat completion. Returns (response json, Call record)."""
+        if self.max_spend is not None and self.spent >= self.max_spend:
+            raise OtariError(402, f"local spend cap of ${self.max_spend:g} for this run reached (budget)")
         body = {"model": model, "messages": messages, **params}
         # Cost attribution tags: show up on Otari's usage rows, never sent upstream.
         body.setdefault("metadata", {}).update({"app": APP_TAG, "role": role})

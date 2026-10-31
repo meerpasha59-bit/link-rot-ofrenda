@@ -105,6 +105,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--reckoner", default=os.environ.get("OFRENDA_RECKONER", "openai/gpt-oss-120b"),
                     help="otari only: open-weight model that computes each page's span in Otari's code "
                          "sandbox; every number is re-checked locally ('none' to skip)")
+    ap.add_argument("--max-spend", type=float, default=float(os.environ.get("OFRENDA_MAX_SPEND", "0.25")),
+                    help="otari only: stop asking models once this run has spent this many USD (as reported by "
+                         "Otari per call). Your workspace budget/ceiling in the Otari dashboard applies too.")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -118,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
     cache.mkdir(parents=True, exist_ok=True)
     if a.backend == "otari":
         from .otari import FallbackModel, Otari, OtariModel
-        client = Otari(session_label=f"ofrenda-{time.strftime('%Y%m%d-%H%M%S')}")
+        client = Otari(session_label=f"ofrenda-{time.strftime('%Y%m%d-%H%M%S')}", max_spend=a.max_spend)
         if a.model:  # one explicit model: no chain
             llm = OtariModel(client, a.model, temperature=a.temperature)
         else:
@@ -136,6 +139,8 @@ def main(argv: list[str] | None = None) -> int:
     print(c(DIM, f"   {len(items)} lost links to remember\n"))
     t0 = time.time()
     entries = []
+    budget_hit = None  # set once Otari (or --max-spend) says the money is spent
+    from .otari import OtariError
     for i, item in enumerate(items, 1):
         url = item["url"]
         entry = dict(item)
@@ -151,9 +156,12 @@ def main(argv: list[str] | None = None) -> int:
             snap = Snapshot(**saved) if saved else None
         else:
             snap = None if (client is not None and a.lookup == "mcp") else find_snapshot(url, item["alive_until"])
-            if snap is None and client is not None and a.archivist != "none":
+            if snap is None and client is not None and a.archivist != "none" and not budget_hit:
                 from .ia_mcp import lookup_via_mcp
-                lead, how = lookup_via_mcp(client, a.archivist, url, item["alive_until"], a.ia_mcp)
+                try:
+                    lead, how = lookup_via_mcp(client, a.archivist, url, item["alive_until"], a.ia_mcp)
+                except OtariError as e:
+                    budget_hit, lead, how = e.detail[:120], None, {"error": "budget reached"}
                 if lead is not None:
                     try:  # the MCP answer is a lead; believe it only if the snapshot really loads
                         page_check = fetch_archived_html(lead)
@@ -210,40 +218,50 @@ def main(argv: list[str] | None = None) -> int:
             continue
 
         t = time.time()
-        mem = remember(llm, url, pretty_ts(snap.timestamp), info["title"], source, name=item["label"])
-        if client is not None and llm.last is not None:
-            mem["served_by"] = {"requested": llm.last.requested, "model": llm.last.served_model,
-                                "provider": llm.last.provider, "fallback": llm.last.fallback,
-                                "skipped": list(getattr(llm, "skipped", []))}
-            sb = mem["served_by"]
-            print(c(GREY, f"      written by     : {sb['model']} on {sb['provider']} via Otari"
-                          f" (asked for {sb['requested']}{', fell back' if sb['fallback'] else ''})"))
-        if client is not None and a.witness != "none" and mem.get("verified"):
-            from .witness import cross_examine
-            w = cross_examine(client, a.witness, mem["summary"], f"{item['label']}\n{info['title']}\n{source}")
-            mem["witness"] = w
-            if w["verdict"] == "unsupported":
-                mem["verified"] = False
-                print(c(ROSE, f"      witness        : {w['model']} objects to: "
-                              + "; ".join(f"“{p}”" for p in w["unsupported"])))
-            else:
-                print(c(GREY, f"      witness        : {w['model']} -> {w['verdict']}"))
-        if client is not None and a.archivist != "none":
-            from .afterlife import find_afterlife
-            akey = cache / ("afterlife-" + hashlib.sha1(url.encode()).hexdigest()[:16] + ".json")
-            if akey.exists():
-                after = json.loads(akey.read_text(encoding="utf-8"))
-            else:
-                after = find_afterlife(client, a.archivist, item["label"] or info["title"] or url, url,
-                                       pretty_ts(snap.timestamp))
-                if after.get("links"):
-                    akey.write_text(json.dumps(after), encoding="utf-8")
-            entry["afterlife"] = after
-            for link in after.get("links", []):
-                print(c(GREEN, f"      lives on at    : {link['url']}") + c(DIM, f"  ({link['title'][:50]})"))
-            if not after.get("links"):
-                print(c(GREY, "      lives on at    : nothing verifiable found; leaving it blank"
-                              + (f" ({after['error'][:60]})" if after.get("error") else "")))
+        try:
+            if budget_hit:
+                raise OtariError(402, budget_hit)
+            mem = remember(llm, url, pretty_ts(snap.timestamp), info["title"], source, name=item["label"])
+            if client is not None and llm.last is not None:
+                mem["served_by"] = {"requested": llm.last.requested, "model": llm.last.served_model,
+                                    "provider": llm.last.provider, "fallback": llm.last.fallback,
+                                    "skipped": list(getattr(llm, "skipped", []))}
+                sb = mem["served_by"]
+                print(c(GREY, f"      written by     : {sb['model']} on {sb['provider']} via Otari"
+                              f" (asked for {sb['requested']}{', fell back' if sb['fallback'] else ''})"))
+            if client is not None and a.witness != "none" and mem.get("verified"):
+                from .witness import cross_examine
+                w = cross_examine(client, a.witness, mem["summary"], f"{item['label']}\n{info['title']}\n{source}")
+                mem["witness"] = w
+                if w["verdict"] == "unsupported":
+                    mem["verified"] = False
+                    print(c(ROSE, f"      witness        : {w['model']} objects to: "
+                                  + "; ".join(f"“{p}”" for p in w["unsupported"])))
+                else:
+                    print(c(GREY, f"      witness        : {w['model']} -> {w['verdict']}"))
+            if client is not None and a.archivist != "none":
+                from .afterlife import find_afterlife
+                akey = cache / ("afterlife-" + hashlib.sha1(url.encode()).hexdigest()[:16] + ".json")
+                if akey.exists():
+                    after = json.loads(akey.read_text(encoding="utf-8"))
+                else:
+                    after = find_afterlife(client, a.archivist, item["label"] or info["title"] or url, url,
+                                           pretty_ts(snap.timestamp))
+                    if after.get("links"):
+                        akey.write_text(json.dumps(after), encoding="utf-8")
+                entry["afterlife"] = after
+                for link in after.get("links", []):
+                    print(c(GREEN, f"      lives on at    : {link['url']}") + c(DIM, f"  ({link['title'][:50]})"))
+                if not after.get("links"):
+                    print(c(GREY, "      lives on at    : nothing verifiable found; leaving it blank"
+                                  + (f" ({after['error'][:60]})" if after.get("error") else "")))
+        except OtariError as e:
+            if not e.budget_exhausted:
+                raise
+            budget_hit = budget_hit or e.detail[:120]
+            mem = {"summary": "", "epitaph": "", "offering": "", "grounding": 0.0, "suspects": [],
+                   "verified": False, "budget": budget_hit}
+            print(c(ROSE, f"      budget reached : {budget_hit}. No model asked; the page speaks for itself."))
         entry["memory"] = mem
         status = c(GREEN, "grounded") if mem.get("verified") else c(ROSE, "withheld, quoting the page instead")
         print(c(ROSE, f"      epitaph        : {mem.get('epitaph', '')}"))
@@ -255,9 +273,12 @@ def main(argv: list[str] | None = None) -> int:
         entries.append(entry)
 
     reckoning = None
-    if client is not None and a.reckoner != "none":
+    if client is not None and a.reckoner != "none" and not budget_hit:
         from .reckoner import reckon, span_words
-        reckoning = reckon(client, a.reckoner, entries)
+        try:
+            reckoning = reckon(client, a.reckoner, entries)
+        except OtariError as e:
+            reckoning = {"status": "skipped", "error": e.detail[:120]}
         for pid, days in (reckoning.get("agreed") or {}).items():
             entries[int(pid)]["span"] = {"days": days, "words": span_words(days)}
         if reckoning.get("status") == "checked":
@@ -274,7 +295,12 @@ def main(argv: list[str] | None = None) -> int:
     json_path.write_text(json.dumps(entries, indent=2, ensure_ascii=False), encoding="utf-8")
     lit = sum(1 for e in entries if e.get("snapshot"))
     if client is not None:
-        print(c(DIM, f"   Otari: {len(client.calls)} gateway calls, ${client.spent:.4f} spent this run"))
+        print(c(DIM, f"   Otari: {len(client.calls)} gateway calls, ${client.spent:.4f} spent this run"
+                     f" (cap ${a.max_spend:g})" + (f"; stopped early: {budget_hit}" if budget_hit else "")))
+        ledger_path = out.with_name("otari-ledger.json")
+        ledger_path.write_text(json.dumps({"spent_usd": client.spent, "max_spend_usd": a.max_spend,
+                                           "budget_hit": budget_hit, "reckoning": reckoning,
+                                           "calls": client.ledger()}, indent=2), encoding="utf-8")
     print(c(MARIGOLD, f"🕯️  {lit} candles lit, {len(entries) - lit} unlit.") +
           f" Wrote {out} and {json_path} in {time.time() - t0:.0f}s.")
     return 0
