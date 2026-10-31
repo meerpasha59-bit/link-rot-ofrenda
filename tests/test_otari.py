@@ -86,3 +86,23 @@ class AfterlifeTest(unittest.TestCase):
         from ofrenda.afterlife import verified_links
         answer = '{"links": ["http://pownce.com/", "https://web.archive.org/web/2008/http://pownce.com/"]}'
         self.assertEqual(verified_links(answer, self.TOOLS, "http://www.pownce.com/"), [])
+
+
+class ReckonerTest(unittest.TestCase):
+    ENTRIES = [{"snapshot": {"first_seen": "20070628204041", "timestamp": "20081229052219"}},
+               {"snapshot": {"first_seen": "20060101000000", "timestamp": "20060111000000"}},
+               {"url": "unlit"}]
+
+    def test_only_numbers_that_match_a_local_check_are_kept(self):
+        from ofrenda.reckoner import local_days, reckon
+        right = local_days("20070628", "20081229")
+        fake = FakeClient({"r": '{"days": {"0": %d, "1": 11}, "total_days": %d}' % (right, right + 11)})
+        out = reckon(fake, "r", self.ENTRIES)
+        self.assertEqual(out["agreed"], {"0": right})
+        self.assertEqual(out["disagreed"], ["1"])  # 10 days, not 11: dropped
+        self.assertIsNone(out["total_days"])
+
+    def test_span_words(self):
+        from ofrenda.reckoner import span_words
+        self.assertEqual(span_words(550), "1 year 6 months")
+        self.assertEqual(span_words(12), "12 days")

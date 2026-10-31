@@ -102,6 +102,9 @@ def main(argv: list[str] | None = None) -> int:
                          "(through Otari) only if that fails; 'mcp' asks the MCP server first")
     ap.add_argument("--ia-mcp", default=os.environ.get("OFRENDA_IA_MCP", "https://internet-archive.caseyjhand.com/mcp"),
                     help="otari only: Streamable-HTTP URL of an Internet Archive MCP server")
+    ap.add_argument("--reckoner", default=os.environ.get("OFRENDA_RECKONER", "openai/gpt-oss-120b"),
+                    help="otari only: open-weight model that computes each page's span in Otari's code "
+                         "sandbox; every number is re-checked locally ('none' to skip)")
     ap.add_argument("--temperature", type=float, default=0.3)
     ap.add_argument("--cache", default=".ofrenda-cache", help="where archived pages are cached")
     ap.add_argument("--no-liveness", action="store_true", help="skip the live 'cause of death' check")
@@ -250,6 +253,19 @@ def main(argv: list[str] | None = None) -> int:
                       f"{', suspects ' + ', '.join(mem['suspects']) if mem.get('suspects') else ''} -> ") + status
               + c(DIM, f"  ({time.time() - t:.1f}s)") + "\n")
         entries.append(entry)
+
+    reckoning = None
+    if client is not None and a.reckoner != "none":
+        from .reckoner import reckon, span_words
+        reckoning = reckon(client, a.reckoner, entries)
+        for pid, days in (reckoning.get("agreed") or {}).items():
+            entries[int(pid)]["span"] = {"days": days, "words": span_words(days)}
+        if reckoning.get("status") == "checked":
+            print(c(GREY, f"   reckoner: {reckoning['model']} computed {len(reckoning['agreed']) + len(reckoning['disagreed'])} spans in Otari's "
+                          f"code sandbox; {len(reckoning['agreed'])} match a local check"
+                          + (f", {len(reckoning['disagreed'])} disagreed and were dropped" if reckoning["disagreed"] else "")))
+        else:
+            print(c(GREY, f"   reckoner: {reckoning.get('status')} {reckoning.get('error', '')}"))
 
     out = Path(a.out)
     out.parent.mkdir(parents=True, exist_ok=True)
